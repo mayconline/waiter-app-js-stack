@@ -14,6 +14,17 @@
 
 #### :rocket: User Stack
 
-### Server
+#### Server
 
 - [Express](https://expressjs.com/pt-br/guide/routing.html)
+
+##### 🤷 How Running ?
+
+1- Run Docker and Server
+
+```
+cd server
+nvm use
+sudo docker-compose up
+yarn dev
+```
