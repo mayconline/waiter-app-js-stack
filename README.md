@@ -23,8 +23,18 @@
 1- Run Docker and Server
 
 ```
+# open server folder
 cd server
+
+# select node version
 nvm use
+
+# run docker
 sudo docker-compose up
+
+# install dependecies
+yarn
+
+# run server
 yarn dev
 ```
