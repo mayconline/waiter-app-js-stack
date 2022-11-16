@@ -1,7 +1,5 @@
-<p align="center">
-   <div style="background:#D73035; text-align:center;">
+<p align="center" >
    <img src=".github/logo.png" alt="logo" height="360px"/>
-   </div>
 </p>
 
 # Waiter App
