@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Button } from '../components/Button';
 import { Cart } from '../components/Cart';
@@ -8,7 +8,6 @@ import { Empty } from '../components/Icons/Empty';
 import { Menu } from '../components/Menu';
 import { TableModal } from '../components/TableModal';
 import { Text } from '../components/Text';
-import { products as mockProducts } from '../mocks/products';
 import { CartItem } from '../types/CartItem';
 import { Product } from '../types/Product';
 import {
@@ -19,13 +18,50 @@ import {
   FooterContainer,
   MenuContainer,
 } from './styles';
+import { Category } from '../types/Category';
+import { api, AxiosResponse } from '../services/api';
 
 export function Main() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(false);
   const [isTableModalVisible, setIsTableModalVisible] = useState(false);
   const [selectedTable, setSelectedTable] = useState('');
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [products, setProducts] = useState<Product[]>(mockProducts);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    Promise.all([api.get('/categories'), api.get('/products')])
+      .then(
+        ([categoriesResponse, productsResponse]: [
+          AxiosResponse<Category[]>,
+          AxiosResponse<Product[]>,
+        ]) => {
+          setCategories(categoriesResponse.data);
+          setProducts(productsResponse.data);
+        },
+      )
+      .catch(err => console.log(err))
+      .finally(() => setIsLoading(false));
+  }, []);
+
+  async function handleFilterProductByCategory(categoryId: string) {
+    setIsLoadingProducts(true);
+    try {
+      const route = !categoryId
+        ? '/products'
+        : `/categories/${categoryId}/products`;
+
+      const { data }: AxiosResponse<Product[]> = await api.get(route);
+      if (data.length) {
+        setProducts(data);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoadingProducts(false);
+    }
+  }
 
   function handleSaveTable(table: string) {
     setSelectedTable(table);
@@ -97,20 +133,31 @@ export function Main() {
         {!isLoading ? (
           <>
             <CategoriesContainer>
-              <Categories />
+              <Categories
+                categories={categories}
+                onFilterProductByCategory={handleFilterProductByCategory}
+              />
             </CategoriesContainer>
 
-            {products.length > 0 ? (
-              <MenuContainer>
-                <Menu onAddToCart={handleAddToCart} products={products} />
-              </MenuContainer>
+            {isLoadingProducts ? (
+              <CenteredContainer>
+                <ActivityIndicator color="#d73035" size="large" />
+              </CenteredContainer>
             ) : (
-              <CategoriesContainer>
-                <Empty />
-                <Text color="#666" style={{ marginTop: 24 }}>
-                  Nenhum produto foi encontrado!
-                </Text>
-              </CategoriesContainer>
+              <>
+                {products.length > 0 ? (
+                  <MenuContainer>
+                    <Menu onAddToCart={handleAddToCart} products={products} />
+                  </MenuContainer>
+                ) : (
+                  <CategoriesContainer>
+                    <Empty />
+                    <Text color="#666" style={{ marginTop: 24 }}>
+                      Nenhum produto foi encontrado!
+                    </Text>
+                  </CategoriesContainer>
+                )}
+              </>
             )}
           </>
         ) : (
@@ -136,6 +183,7 @@ export function Main() {
               onAddToCart={handleAddToCart}
               onDecrementCartItem={handleDecrementCartItem}
               onConfirmOrder={handleResetOrder}
+              selectedTable={selectedTable}
             />
           )}
         </FooterContainer>
