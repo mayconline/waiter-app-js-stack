@@ -38,3 +38,9 @@ yarn
 # run server
 yarn dev
 ```
+
+#### 📱 Preview Mobile
+
+<p align="center">
+<video src='.github/assets/waiterApp_mobile.mp4' width=180/> 
+</p>
