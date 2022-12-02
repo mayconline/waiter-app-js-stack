@@ -18,7 +18,7 @@ export const CloseButton = styled.TouchableOpacity`
 
 export const ModalBody = styled.View`
   flex: 1;
-  background: '#fafafa';
+  background: #fafafa;
   padding: 32px 24px 0;
 `;
 

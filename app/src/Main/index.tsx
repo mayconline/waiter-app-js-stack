@@ -53,9 +53,7 @@ export function Main() {
         : `/categories/${categoryId}/products`;
 
       const { data }: AxiosResponse<Product[]> = await api.get(route);
-      if (data.length) {
-        setProducts(data);
-      }
+      setProducts(data);
     } catch (err) {
       console.log(err);
     } finally {

@@ -75,7 +75,7 @@ export function Cart({
         onClose={handleOK}
       />
 
-      {cartItems?.length && (
+      {!!cartItems?.length && (
         <FlatList
           data={cartItems}
           keyExtractor={cartItem => cartItem.product._id}
