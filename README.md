@@ -42,5 +42,9 @@ yarn dev
 #### 📱 Preview Mobile
 
 <p align="center">
-<video src='.github/assets/waiterApp_mobile.mp4' width=180/> 
+<video src='https://user-images.githubusercontent.com/38052474/205186168-f260f061-ae7c-4fdf-a7e6-346f0a9257c6.mp4' width=180/> 
 </p>
+
+
+
+
