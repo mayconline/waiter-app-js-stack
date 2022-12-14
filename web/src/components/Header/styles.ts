@@ -6,6 +6,7 @@ export const Container = styled.header`
   justify-content: center;
   height: 198px;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 export const Content = styled.div`
@@ -14,6 +15,7 @@ export const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   .page-details {
     h1 {
@@ -27,5 +29,9 @@ export const Content = styled.div`
       opacity: 0.9;
       margin-top: 0.2rem;
     }
+  }
+
+  @media only screen and (max-width: 640px) {
+    flex-direction: column-reverse;
   }
 `;
