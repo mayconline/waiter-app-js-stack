@@ -39,12 +39,40 @@ yarn
 yarn dev
 ```
 
+2 - Run Dashboard
+
+```
+# open web folder
+cd web
+
+# create .env file and fill the variable with server url
+VITE_API_URL = <ServerUrl>
+
+# select node version
+nvm use
+
+# install dependecies
+yarn
+
+# build project
+yarn build
+
+# install local server
+npm i -g serve
+
+# run dist
+yarn start
+
+```
+
 #### 📱 Preview Mobile
 
 <p align="center">
 <video src='https://user-images.githubusercontent.com/38052474/205186168-f260f061-ae7c-4fdf-a7e6-346f0a9257c6.mp4' width=180/> 
 </p>
 
+#### 📱 Preview Dashboard
 
-
-
+<p align="center">
+<video src='https://user-images.githubusercontent.com/38052474/205186168-f260f061-ae7c-4fdf-a7e6-346f0a9257c6.mp4' width=180/> 
+</p>
