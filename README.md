@@ -74,5 +74,9 @@ yarn start
 #### 📱 Preview Dashboard
 
 <p align="center">
-<video src='https://user-images.githubusercontent.com/38052474/205186168-f260f061-ae7c-4fdf-a7e6-346f0a9257c6.mp4' width=180/> 
+<video src='https://user-images.githubusercontent.com/38052474/207961083-35735485-f90c-41e2-ae45-6e390711579c.mp4' width=180/> 
 </p>
+
+
+
+
